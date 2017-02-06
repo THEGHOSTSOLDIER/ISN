@@ -29,3 +29,4 @@ Label.pack()
 quitter=Button(main, text='quitter', command=main.destroy)
 quitter.pack(side=BOTTOM)
 
+https://www.youtube.com/playlist?list=PLnK-dgqir1docz9Pp_cdABJsJbCcowQzu
