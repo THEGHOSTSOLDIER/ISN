@@ -1,0 +1,31 @@
+from tkinter import *
+from winsound import *
+
+main = Tk()
+main.geometry("500x400+600+400")
+main.title('NINJA BATTLE')
+main['background'] = '#6709D2'
+fond = PhotoImage(file = "logo.png")
+Labelimage = Label(main, image = fond).pack()
+musique_menu = PlaySound("SacredBlade.wav", SND_FILENAME | SND_ASYNC)
+def jeu():
+    print("va programmer !")
+    Label['text'] = Options.get()    
+
+Options = StringVar()
+
+texte1 = Label(main,text="Ninja Battle 1.0",background='red').pack()
+
+texte2 = Entry(main,textvariable=Options).pack()
+
+bouton1 = Button(main,text="Jouer",background='#00F431',command = jeu).place(x='250',y='200')
+
+Label = Label(main)
+
+Label['background'] = '#01F2FA'
+Label['fg'] = 'red'
+Label.pack()
+
+quitter=Button(main, text='quitter', command=main.destroy)
+quitter.pack(side=BOTTOM)
+
