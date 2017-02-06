@@ -1,6 +1,6 @@
 test ecriture
 test ISN projet
-
+truc
 from tkinter import *
 fenetre = Tk()
 champ_label = Label(fenetre, text = "Salut")
