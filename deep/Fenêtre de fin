@@ -1,0 +1,40 @@
+from tkinter import*
+from tkinter.messagebox import*
+from os import*
+
+fenetre = Tk()
+fenetre.title("NinjaBattle")
+fenetre.attributes("-fullscreen",1)
+fenetre['bg'] = '#1B2322'
+
+fond_1 = PhotoImage(file="ninja1.png")
+Labelimage = Label(fenetre, image=fond_1).pack()
+
+
+label = Label(fenetre, text = "Merci d'avoir joué à Ninjabattle", fg = 'red', bg= '#1B2322', font=("helvetica",35))
+label.pack()
+
+def rejouer():
+    if askyesno('Rejouer', 'Etes-vous sûr de vouloir rejouer ?'):
+        showinfo("C'est re-partie!", 'Bonne nouvelle partie Ninja Battle ')
+        fenetre.destroy()
+        import Accueil        
+
+def sortie():
+    if askyesno('QUITTER', 'Etes-vous sûr de vouloir quitter Ninja Battle ?'):
+        showwarning('Au revoir', 'A bientôt sur NinjaBattle')
+        fenetre.destroy()
+    else:
+        showinfo('Re-bonjour', 'Retour à NinjaBattle')
+        
+def statistique():
+    startfile("sauv.csv")
+    
+bouton_rejouer = Button(fenetre, text = "Cliquer pour rejouer", command = rejouer, height=3, width=40, relief=GROOVE)
+bouton_rejouer.pack(side=TOP, pady=10)
+
+bouton_stat = Button(fenetre, text="Vos statistiques de jeu", command=statistique,height=3, width=40, relief=GROOVE)
+bouton_stat.pack(side=TOP, pady=10)
+
+bouton_fin = Button(fenetre, text = " Quitter NinjaBattle ", command = sortie, height=2, width=40, relief=GROOVE)
+bouton_fin.pack()
