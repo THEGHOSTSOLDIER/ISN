@@ -1,0 +1,128 @@
+#Fenetre d'accueil et de menu
+
+from tkinter import*
+from tkinter.messagebox import*
+import csv
+import time
+
+fenetre = Tk()
+fenetre.title("NinjaBattle")
+fenetre.attributes("-fullscreen",1)
+                      
+cadre_1 = Frame(fenetre, bg='#1B2322')
+cadre_1.pack(fill=BOTH ,expand=Y)
+
+cadre_2 = Frame(fenetre, bg='#1B2322')
+cadre_3 = Frame(fenetre, bg='#1B2322')
+cadre_4 = Frame(fenetre, bg='#1B2322')
+
+fond_1 = PhotoImage(file="ninja1.png")
+image_accueil = Label(cadre_1, image=fond_1).pack(pady=30)
+
+label_bienvenue = Label(cadre_1, text = 'Bienvenue sur NinjaBattle', fg = 'red', bg= '#1B2322', font=("helvetica",35))
+label_bienvenue.pack()
+
+def suite():
+    cadre_1.pack_forget()
+    cadre_2.pack(fill=BOTH, expand=Y)
+    
+bouton_start = Button(cadre_1, text="START", command=suite, width=40, height=3, relief=GROOVE)
+bouton_start.pack()
+
+fond_2 = PhotoImage(file= "ninja2.png")
+Labelimage_2 = Label(cadre_2, image=fond_2)
+Labelimage_2.pack(side=TOP, pady=20)
+
+label_b2 = Label(cadre_2, text = 'Bienvenue sur NinjaBattle',fg = 'red', bg = '#1B2322', font=("helvetica",35))
+label_b2.pack()
+
+def sortie():
+    if askyesno('QUITTER', 'Etes-vous sûr de vouloir quitter Ninjabattle ?'):
+        showwarning('Au revoir', 'A bientôt sur NinjaBattles')
+        fenetre.destroy()
+    else:
+        showinfo('Re-bonjour', 'Retour à NinjaBattle')
+
+def recupere():
+    t = time.strftime("%A %d %B %Y %H:%M:%S")
+    with open('sauv.csv', 'a') as csvfile:
+        titres = (['nom','date'])
+        writer = csv.DictWriter(csvfile, fieldnames=titres)
+        writer.writeheader()
+        writer.writerow({'nom': entree.get(),'date':t})
+    showinfo("C'est parti!", 'Bonne partie '+ entree.get())
+    fenetre.destroy()
+    import FIN
+
+value = StringVar()
+value.set("Entrez votre nom de joueur")
+entree = Entry(cadre_2, textvariable=value, width=30, font=("TIME"))
+entree.pack()
+
+def fenetre_comm():
+    cadre_2.pack_forget()
+    cadre_3.pack(fill=BOTH, expand=Y)
+    
+bouton_Go = Button(cadre_2, text="Cliquer pour jouer!", command=recupere ,height=5,width=40,relief=RAISED)
+bouton_Go.pack(side=TOP, pady=10)
+
+bouton_commande = Button(cadre_2, text="Commandes", command=fenetre_comm ,height=3, width=40, relief=GROOVE)
+bouton_commande.pack(side=TOP, pady=10)
+
+bouton_quitter = Button(cadre_2, text = 'Quitter le jeu ', command = sortie, height=3, width=40, relief=GROOVE)
+bouton_quitter.pack()
+
+label_commande = Label(cadre_3, text='Comment jouer à Ninja Battle', fg = 'red', bg= '#1B2322', font=("helvetica",35))
+label_commande.pack()
+
+label_deplacement = Label(cadre_3, text="Les déplacements",fg = 'red', bg= '#1B2322', font=("helvetica",20))
+label_deplacement.pack()
+
+label_D = Label(cadre_3, text='Appuyer sur la touche de droite pour vous déplacer vers la droite', fg='red',bg= '#1B2322', font=("helvetica",12))
+label_D.pack()
+
+dep_droite = PhotoImage(file="droite.png")
+droite = Label(cadre_3, image=dep_droite).pack()
+
+label_G = Label(cadre_3, text='Appuyer sur la touche de gauche pour vous déplacer vers la gauche', fg='red',bg= '#1B2322', font=("helvetica",12))
+label_G.pack()
+
+dep_gauche = PhotoImage(file="gauche.png")
+gauche = Label(cadre_3, image=dep_gauche).pack()
+
+label_H = Label(cadre_3, text='Appuyer sur la touche du haut pour vous déplacer vers le haut', fg='red',bg= '#1B2322', font=("helvetica",12))
+label_H.pack()
+
+dep_haut = PhotoImage(file="haut.png")
+haut = Label(cadre_3, image=dep_haut).pack()
+
+label_B = Label(cadre_3, text='Appuyer sur la touche du bas pour vous déplacer vers le bas', fg='red',bg= '#1B2322', font=("helvetica",12))
+label_B.pack()
+
+dep_bas = PhotoImage(file="bas.png")
+bas = Label(cadre_3, image=dep_bas).pack(side=TOP, pady=10)
+
+def fenetre_comm2():
+    cadre_3.pack_forget()
+    cadre_4.pack(fill=BOTH, expand=Y)
+
+bouton_comm2 = Button(cadre_3, text="Suite des commandes",command=fenetre_comm2, height=3, width=20, relief=GROOVE)
+bouton_comm2.pack()
+    
+def retour():
+    cadre_4.pack_forget()
+    cadre_2.pack(fill=BOTH, expand=Y)
+
+label_attaquer = Label(cadre_4, text = 'L attaque', fg = 'red', bg= '#1B2322', font=("helvetica",20),)
+label_attaquer.pack()
+
+label_att1 = Label(cadre_4, text='Appuyer sur W pour effectuer l attque 1', fg='red',bg= '#1B2322', font=("helvetica",14))
+label_att1.pack(side=TOP, pady=10)
+
+att1 = PhotoImage(file="W.png")
+W = Label(cadre_4, image=att1).pack(side=TOP, pady=10)
+
+bouton_quitter = Button(cadre_4, text="Retour au menu", command= retour,height=3, width=20, relief=GROOVE)
+bouton_quitter.pack()
+
+fenetre.mainloop()
